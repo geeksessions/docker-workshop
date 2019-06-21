@@ -115,5 +115,27 @@ NOTES:
 
 * mongodb fixed version to avoid migration issues (avoid using latest tag to containers that you do not control)
 * frontend package.json proxy update, will resolve docker container ip from service name
-* backend .env file update, will resolve docker contaienr ip from service name
+* backend .env file update, will resolve docker container ip from service name
 * backend service fails to communicate during the initial period due to mongodb container start time
+
+## step03 branch: wait-for script
+
+For the next step we will tweak backend service, wait for the mongodb service to be ready and fully functional, meaning that we will use docker-compose `depends
+_on` functionality and since this will not completely solve our issue and additional wait-for script will be added to the backend service, forcing the container to wait until mongodb is up and totally functional.
+
+Source:
+
+* https://github.com/eficode/wait-for
+* https://dev.to/hugodias/wait-for-mongodb-to-start-on-docker-3h8b
+
+Using EntryPoint option:
+
+* https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data
+
+```bash
+docker-compose down
+docker-compose build
+docker-compose up
+open http://localhost:3000
+docker-compose down
+```

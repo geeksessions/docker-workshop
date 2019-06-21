@@ -23,6 +23,9 @@ services:
     ports:
       - 3000:3000
     restart: always
+    depends_on:
+      - mongodb
+      - gsbackend
     networks:
       - geeksessions-network
   gsbackend:
@@ -34,6 +37,9 @@ services:
     ports:
       - 3001:3001
     restart: always
+    depends_on:
+      - mongodb
+    command: sh -c '/wait-for mongodb:27017 -- npm run start:dev'
     networks:
       - geeksessions-network
 networks:

@@ -18,5 +18,8 @@ RUN npm install
 # Bundle app source after installation to use docker build cache effectively
 COPY ./sourcecode/ ./
 
+# not required, but nice to have (to be explicit about the container required ports)
+EXPOSE 3000
+
 # Run React app
 CMD ["npm", "start"]
