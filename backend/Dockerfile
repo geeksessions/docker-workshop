@@ -1,5 +1,8 @@
 FROM mhart/alpine-node:8
 
+# Add curl tool required for the healthcheck CMD
+RUN apk --no-cache add curl  
+
 # Sets NODE_ENV as development so devDependencies are installed
 ENV NODE_ENV=development
 

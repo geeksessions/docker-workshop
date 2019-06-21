@@ -168,3 +168,24 @@ Change some files form the frontend and backend, super awesome, you can check th
 Why do we need to use the trick to re-bind the node_modules to the docker container original files? Because, if you are running on a different OS for the host you could potentially have dependencies with binary files that specific for your OS and will fail to run properly in the docker container!
 
 Downside, if you need to update your dependencies, then you need to `docker-compose down && docker-compose build && docker-compose up`, so that your new dependencies gets bundled into your docker image.
+
+## step05 branch: backend healthcheck and autoheal service
+
+Going the extra mile ... healthcheck feature is not really common to use in local development, but something that you will find latter in PRODUCTION systems, anyway, this is a nice trick that you can use for times that nodemon gets stuck and you backend api crashes without possible recovery! Autoheal to the rescue!
+
+Please take an extra note, in order for the docker healthcheck command to work, the backend docker container must have `curl` tool installed!!! Please check the `Dockerfile` and build the container image again!
+
+```bash
+docker-compose down
+docker-compose build
+docker-compose up
+open http://localhost:3000
+
+# check the service health
+docker-compose ps
+# crash the backend api and re-check the service health
+curl http://localhost:3001/api/ddos
+docker-compose ps
+
+docker-compose down
+```

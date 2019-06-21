@@ -43,9 +43,27 @@ services:
       - "./backend/sourcecode:/usr/src/app"
       - "/usr/src/app/node_modules" # TRICK: re-bind to the container internal filesystem: original node_modules folder
     restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/healthcheck"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
     depends_on:
       - mongodb
     command: sh -c '/wait-for mongodb:27017 -- npm run start:dev'
+    networks:
+      - geeksessions-network
+  # required to restart docker-compose services on healthcheck failure:
+  # https://stackoverflow.com/questions/47088261/restarting-an-unhealthy-docker-container-based-on-healthcheck
+  autoheal:
+    restart: always
+    image: willfarrell/autoheal
+    container_name: gsautoheal
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - geeksessions-network
 networks:

@@ -1,4 +1,5 @@
 const express = require('express');
+const process = require('process');
 const _ = require('lodash');
 const db = require('./db');
 
@@ -18,5 +19,11 @@ router.post('/counter', async (req, res) => {
   db.setDataCounter(req.body.value);
   res.sendStatus(200);
 });
+
+// curl http://localhost:3001/api/ddos
+router.get('/ddos', async (req, res) => {
+  process.exit(1);
+});
+
 
 module.exports = router;
