@@ -139,3 +139,32 @@ docker-compose up
 open http://localhost:3000
 docker-compose down
 ```
+
+## step04 branch: live code with hot-reload
+
+Well, this is pretty cool stuff, but every time the source code changes it will required to `docker-compose down && docker-compose build && docker-compose up`, so it's not really efficient!
+
+Oh, sure sure ... let's dive in! Let's use docker bind mounts for our frontend/backend services, similar to what we already did for the mongodb database files, this way the files from the host and the container will be in sync, we will be able to do live coding with our nice file editor, while the containers will do an hot-reload whenever the files change!
+
+```bash
+docker-compose down
+
+# caution: removing host node_modules, not totally required but just to make sure all is fine!
+rm -rf frontend/sourcecode/node_modules
+rm -rf backend/sourcecode/node_modules
+
+docker-compose up
+open http://localhost:3000
+
+# side-effect, node_modules dir is mapped to host but empty
+ls -la frontend/sourcecode/node_modules
+ls -la backend/sourcecode/node_modules
+
+docker-compose down
+```
+
+Change some files form the frontend and backend, super awesome, you can check that the nodemon in the backend restarts the process, also the CRA (create-react-app) hot-reload feature works as expected!
+
+Why do we need to use the trick to re-bind the node_modules to the docker container original files? Because, if you are running on a different OS for the host you could potentially have dependencies with binary files that specific for your OS and will fail to run properly in the docker container!
+
+Downside, if you need to update your dependencies, then you need to `docker-compose down && docker-compose build && docker-compose up`, so that your new dependencies gets bundled into your docker image.

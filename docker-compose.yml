@@ -22,6 +22,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    volumes:
+      - "./frontend/sourcecode:/usr/src/app"
+      - "/usr/src/app/node_modules" # TRICK: re-bind to the container internal filesystem: original node_modules folder
     restart: always
     depends_on:
       - mongodb
@@ -36,6 +39,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3001:3001
+    volumes:
+      - "./backend/sourcecode:/usr/src/app"
+      - "/usr/src/app/node_modules" # TRICK: re-bind to the container internal filesystem: original node_modules folder
     restart: always
     depends_on:
       - mongodb
