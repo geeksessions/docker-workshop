@@ -125,12 +125,12 @@ _on` functionality and since this will not completely solve our issue and additi
 
 Source:
 
-* https://github.com/eficode/wait-for
-* https://dev.to/hugodias/wait-for-mongodb-to-start-on-docker-3h8b
+* <https://github.com/eficode/wait-for>
+* <https://dev.to/hugodias/wait-for-mongodb-to-start-on-docker-3h8b>
 
 Using EntryPoint option:
 
-* https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data
+* <https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data>
 
 ```bash
 docker-compose down
