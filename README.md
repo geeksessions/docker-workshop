@@ -97,3 +97,23 @@ Respective `Dockerfile` can be found in this branch, open both to review what it
 Re-using the same base docker image `FROM mhart/alpine-node:8` is one of the key points of docker, image is already cached in your system, only additional file layers of the final image will be created, you also take the advantaged of a common base, if you need to fix something in one container it will be simple to reuse the same recipe, and we are already saving a lot of space using a slim version of node.js with alpine!
 
 Please note, we are still running the docker containers isolated from each other, just to check if the Dockerfiles are correct. At this point we are not connecting the containers internally, and it was required to make some hacks to get it to work, but none of this will be required, docker-compose services will make all this pretty simple!
+
+## step02 branch: create the initial docker-compose.yml (no live coding support)
+
+Second step will focus on the `docker-compose.yml` initial version. File is already available in the repository, make sure you review the changes and compare with previous manual instructions, you will find it simpler and pretty descriptive, no more complex commands to run!
+
+```bash
+docker-compose build
+docker-compose up -d
+docker-compose ps
+docker-compose logs -f
+open http://localhost:3000
+docker-compose down
+```
+
+NOTES:
+
+* mongodb fixed version to avoid migration issues (avoid using latest tag to containers that you do not control)
+* frontend package.json proxy update, will resolve docker container ip from service name
+* backend .env file update, will resolve docker contaienr ip from service name
+* backend service fails to communicate during the initial period due to mongodb container start time

@@ -43,6 +43,6 @@
     "@babel/core": "^7.4.5",
     "babel-loader": "^8.0.5"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://gsbackend:3001",
   "homepage": "./"
 }
