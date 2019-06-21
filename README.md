@@ -25,22 +25,43 @@ In the master branch you will find the web-application source code, to launch it
 2) Install backend dependencies and launch backend api
 
     ```bash
-        # from repository root path
-        cd backend/sourcecode
-        npm i
-        # npm start ## start node without nodemon hot-reload functionality
-        npm run start:dev
-        # test api response
-        curl http://localhost:3001/api/healthcheck
+    # from repository root path
+    cd backend/sourcecode
+    npm i
+    # npm start ## start node without nodemon hot-reload functionality
+    npm run start:dev
+    # test api response
+    curl http://localhost:3001/api/healthcheck
     ```
 
 3) Install frontend dependencies and launch
 
     ```bash
-        # from repository root path
-        cd frontend
-        npm i
-        npm start
-        # open browser http://localhost:3000
-        open http://localhost:3000
+    # from repository root path
+    cd frontend
+    npm i
+    npm start
+    # open browser http://localhost:3000
+    open http://localhost:3000
     ```
+
+## Additional branches: step01 to step05
+
+```bash
+git pull
+
+# step01 branch: Dockerize frontend/backend
+git checkout step01
+
+# step02 branch: create the initial docker-compose.yml (no live coding support)
+git checkout step02
+
+# step03 branch: wait-for script
+git checkout step03
+
+# step04 branch: live code with hot-reload
+git checkout step04
+
+# step05 branch: backend healthcheck and autoheal service
+git checkout step05
+```
