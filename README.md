@@ -28,7 +28,8 @@ In the master branch you will find the web-application source code, to launch it
         # from repository root path
         cd backend/sourcecode
         npm i
-        npm start
+        # npm start ## start node without nodemon hot-reload functionality
+        npm run start:dev
         # test api response
         curl http://localhost:3001/api/healthcheck
     ```
