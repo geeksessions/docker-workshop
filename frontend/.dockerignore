@@ -1,0 +1,6 @@
+.git
+.gitignore
+.DS_Store
+*Dockerfile*
+*docker-compose*
+node_modules
